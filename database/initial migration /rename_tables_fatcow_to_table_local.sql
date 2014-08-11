@@ -1,0 +1,11 @@
+ALTER TABLE wp_vtsr_commentmeta RENAME TO wp_sfnctcommentmeta;
+ALTER TABLE wp_vtsr_comments RENAME TO wp_sfnctcomments;
+ALTER TABLE wp_vtsr_links RENAME TO wp_sfnctlinks;
+ALTER TABLE wp_vtsr_options RENAME TO wp_sfnctoptions;
+ALTER TABLE wp_vtsr_postmeta RENAME TO wp_sfnctpostmeta;
+ALTER TABLE wp_vtsr_posts RENAME TO wp_sfnctposts;
+ALTER TABLE wp_vtsr_term_relationships RENAME TO wp_sfnctterm_relationships;
+ALTER TABLE wp_vtsr_term_taxonomy RENAME TO wp_sfnctterm_taxonomy;
+ALTER TABLE wp_vtsr_terms RENAME TO wp_sfnctterms;
+ALTER TABLE wp_vtsr_usermeta RENAME TO wp_sfnctusermeta;
+ALTER TABLE wp_vtsr_users RENAME TO wp_sfnctusers;
