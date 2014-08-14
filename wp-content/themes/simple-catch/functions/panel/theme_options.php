@@ -46,27 +46,6 @@ function simplecatch_options_menu() {
 }
 
 
-/* 
- * Admin Social Links
- * use facebook and twitter scripts
- */
-function simplecatch_admin_social() { ?>
-<!-- Start Social scripts -->
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=276203972392824";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-<!-- End Social scripts -->
-<?php
-}
-add_action('admin_print_styles-appearance_page_theme_options','simplecatch_admin_social');
-
-
 /*
  * Register options and validation callbacks
  *
@@ -102,15 +81,6 @@ function simplecatch_theme_options_do_page() {
             <?php endif; ?>
 
 			<div id="theme-option-header">
-            	<div id="theme-social">
-                	<ul>
-            			<li class="widget-fb">
-                            <div data-show-faces="false" data-width="80" data-layout="button_count" data-send="false" data-href="<?php echo esc_url(__('http://facebook.com/catchthemes','simplecatch')); ?>" class="fb-like"></div></li>
-                     	<li class="widget-tw">
-                            <a data-dnt="true" data-show-screen-name="true" data-show-count="true" class="twitter-follow-button" href="<?php echo esc_url(__('https://twitter.com/catchthemes','simplecatch')); ?>">Follow @catchthemes</a>
-            			</li>
-                   	</ul>
-               	</div><!-- #theme-social -->
             
                 <div id="theme-option-title">
                     <h2 class="title"><?php _e( 'Theme Options By', 'simplecatch' ); ?></h2>
@@ -780,6 +750,11 @@ function simplecatch_theme_options_do_page() {
                                     <th scope="row"><h4><?php _e( 'Soundcloud', 'simplecatch' ); ?> </h4></th>
                                     <td><input type="text" size="45" name="simplecatch_options[social_soundcloud]" value="<?php echo esc_url( $options[ 'social_soundcloud' ] ); ?>" />
                                     </td>
+                                </tr> 
+                                <tr>
+                                    <th scope="row"><h4><?php _e( 'Email', 'simplecatch' ); ?></h4></th>
+                                    <td><input type="text" size="45" name="simplecatch_options[social_email]" value="<?php echo sanitize_email( $options[ 'social_email' ] ); ?>" />
+                                    </td>
                                 </tr>                                                           
                             </tbody>
                         </table><p class="submit"><input type="submit" class="button-primary" value="<?php esc_attr_e( 'Save', 'simplecatch' ); ?>" /></p>      
@@ -1044,7 +1019,10 @@ function simplecatch_theme_options_validate( $options ) {
 	}	
 	if( isset( $input[ 'social_soundcloud' ] ) ) {
 		$input_validated[ 'social_soundcloud' ] = esc_url_raw( $input[ 'social_soundcloud' ] );
-	}	
+	}
+	if( isset( $input[ 'social_email' ] ) ) {
+		$input_validated[ 'social_email' ] = sanitize_email( $input[ 'social_email' ] );
+	}		
 	
 	//Custom CSS Style Validation
 	if ( isset( $input['custom_css'] ) ) {

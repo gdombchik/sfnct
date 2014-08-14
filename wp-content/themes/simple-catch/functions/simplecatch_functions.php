@@ -467,7 +467,8 @@ function simplecatch_headersocialnetworks() {
 						$options[ 'social_odnoklassniki' ],
 						$options[ 'social_goodreads' ],
 						$options[ 'social_skype' ],
-						$options[ 'social_soundcloud' ]
+						$options[ 'social_soundcloud' ],
+						$options[ 'social_email' ]
 					);
 	$flag = 0;
 	if( !empty( $elements ) ) {
@@ -620,7 +621,11 @@ function simplecatch_headersocialnetworks() {
 					$simplecatch_headersocialnetworks .=
 						'<li class="soundcloud"><a href="'.esc_url( $options[ 'social_soundcloud' ] ).'" title="'.sprintf( esc_attr__( '%s on Soundcloud', 'simplecatch' ),get_bloginfo( 'name' ) ).'" target="_blank">'.get_bloginfo( 'name' ).' Soundcloud </a></li>';
 				}
-		
+				//Email
+				if ( !empty( $options[ 'social_email' ] ) && is_email($options[ 'social_email' ] ) ) {
+					$simplecatch_headersocialnetworks .=
+						'<li class="email"><a href="mailto:'.sanitize_email( $options[ 'social_email' ] ).'" title="'.sprintf( esc_attr__( '%s on Email', 'simplecatch' ),get_bloginfo( 'name' ) ).'" target="_blank">'.get_bloginfo( 'name' ).' Email </a></li>';
+				}			
 				$simplecatch_headersocialnetworks .='
 			</ul>
 			<div class="row-end"></div>';

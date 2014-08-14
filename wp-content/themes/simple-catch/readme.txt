@@ -406,3 +406,7 @@ Version 2.7.2
 
 Version 2.7.3
 * Added Hungarian translation hu_HU.po and hu_HU.mo
+
+Version 2.7.4
+* Added email in social link option
+* Optimized Theme Options panel to speed up
