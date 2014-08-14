@@ -810,7 +810,7 @@ ul.social-profile li.soundcloud a:hover {
 	position:absolute;
 	top:0;
 	left:0;
-	//background:url(images/featured-img-effect.png);
+	background:url(images/featured-img-effect.png);
 	z-index:10;
 }
 .featured-text {
