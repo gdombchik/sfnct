@@ -61,6 +61,7 @@ class WPUF_Attachment {
         //var_dump($post_type, $post_obj);
         $attachments = array();
         if ( $post_obj ) {
+            $attachments = wpfu_get_attachments( $post_obj->ID );
         }
         ?>
         <li>
