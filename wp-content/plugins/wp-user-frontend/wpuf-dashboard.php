@@ -64,7 +64,7 @@ class WPUF_Dashboard {
         }
 
         $args = array(
-            'author' => get_current_user_id(),
+            //'author' => get_current_user_id(), //1.   Regardless who logs in, I want to see all the all the posts with the post_type=”membersonly”.
             'post_status' => array('draft', 'future', 'pending', 'publish'),
             'post_type' => $post_type,
             'posts_per_page' => wpuf_get_option( 'per_page', 'wpuf_dashboard', 10 ),
@@ -75,9 +75,9 @@ class WPUF_Dashboard {
         $post_type_obj = get_post_type_object( $post_type );
         ?>
 
-        <h2 class="page-head">
+        <!--<h2 class="page-head">
             <span class="colour"><?php printf( __( "%s's Dashboard", 'wpuf' ), $userdata->user_login ); ?></span>
-        </h2>
+        </h2>-->
 
         <?php if ( wpuf_get_option( 'show_post_count', 'wpuf_dashboard', 'on' ) == 'on' ) { ?>
             <div class="post_count"><?php printf( __( 'You have created <span>%d</span> %s', 'wpuf' ), $dashboard_query->found_posts, $post_type_obj->label ); ?></div>
@@ -101,13 +101,14 @@ class WPUF_Dashboard {
                         }
                         ?>
                         <th><?php _e( 'Title', 'wpuf' ); ?></th>
-                        <th><?php _e( 'Status', 'wpuf' ); ?></th>
+                        <!--<th><?php _e( 'Status', 'wpuf' ); ?></th>-->
                         <?php
                         if ( 'yes' == $charging_enabled ) {
                             echo '<th>' . __( 'Payment', 'wpuf' ) . '</th>';
                         }
                         ?>
                         <th><?php _e( 'Options', 'wpuf' ); ?></th>
+                        <th><?php _e( 'Attachments', 'wpuf' ); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -134,13 +135,14 @@ class WPUF_Dashboard {
 
                                 <?php } else { ?>
 
-                                    <a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpuf' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a>
+                                    <!--<a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpuf' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a>-->
+                                    <?php the_title(); ?>
 
                                 <?php } ?>
                             </td>
-                            <td>
+                            <!--<td>
                                 <?php wpuf_show_post_status( $post->post_status ) ?>
-                            </td>
+                            </td>-->
 
                             <?php
                             if ( $charging_enabled == 'yes' ) {
@@ -167,6 +169,34 @@ class WPUF_Dashboard {
                                 <?php if ( wpuf_get_option( 'enable_post_del', 'wpuf_others', 'yes' ) == 'yes' ) { ?>
                                     <a href="<?php echo wp_nonce_url( "?action=del&pid=" . $post->ID, 'wpuf_del' ) ?>" onclick="return confirm('Are you sure to delete this post?');"><span style="color: red;"><?php _e( 'Delete', 'wpuf' ); ?></span></a>
                                 <?php } ?>
+                            </td>
+                            <td>
+                                <?php 
+
+                                $attachments = wpfu_get_attachments( $post->ID ); 
+
+
+                                foreach ($attachments as $attach) {
+                                    echo  sprintf( '<a href="%s">%s</a> <br>', esc_attr( wp_get_attachment_url( $attach['id']) ), esc_attr(  $attach['title'] ) );
+                                }
+                                 ?>
+
+
+
+                               <!--
+
+                                Code snippet that is not finished.   Should check the array index to the size of the array.
+                                Would be used to create a comma to seperate the attachments or create a break.
+
+                               <?php  if ($attachments) { ?>
+                                    
+                                    <?php echo sizeof($attachments); ?>
+                                <?php } else { ?>
+                                    no attachments
+                                <?php } ?>-->
+
+
+
                             </td>
                         </tr>
                     <?php } ?>

@@ -61,7 +61,6 @@ class WPUF_Attachment {
         //var_dump($post_type, $post_obj);
         $attachments = array();
         if ( $post_obj ) {
-            $attachments = wpfu_get_attachments( $post_obj->ID );
         }
         ?>
         <li>
@@ -124,13 +123,20 @@ class WPUF_Attachment {
 
         $attachment = get_post( $attach_id );
 
+       //echo wp_get_attachment_url( $attach_id );
+
         $html = '';
         $html .= '<li class="wpuf-attachment">';
         $html .= '<span class="handle">Move</span>';
         $html .= '<span class="attachment-title">';
         $html .= sprintf( '<input type="text" name="wpuf_attach_title[]" value="%s" placeholder="%s" />', esc_attr( $attachment->post_title ), esc_attr__( 'Insert Song Title', 'wpuf' ) );
         $html .= '</span>';
-        $html .= sprintf( '<span class="attachment-name">%s</span>', esc_attr( $attachment->post_title ) );
+        //$html .= sprintf( '<span class="attachment-name">%s</span>', esc_attr( $attachment->post_title ) );
+        $html .= ' ';
+        $html .= sprintf( '<a href="%s">%s</a>', esc_attr( wp_get_attachment_url( $attach_id ) ), esc_attr( $attachment->post_title ) );
+
+        
+
         $html .= sprintf( '<span class="attachment-actions"><a href="#" class="track-delete wpuf-button" data-attach_id="%d">%s</a></span>', $attach_id, __( 'Delete', 'wpuf' ) );
         $html .= sprintf( '<input type="hidden" name="wpuf_attach_id[]" value="%d" />', $attach_id );
         $html .= '</li>';
