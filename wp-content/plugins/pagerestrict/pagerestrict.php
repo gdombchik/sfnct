@@ -57,10 +57,11 @@ function pr_get_page_content() {
 		<form style="text-align: left;" action="' . get_bloginfo ( 'wpurl' ) . '/wp-login.php" method="post">
 		' . $errors . '
 			<p>
-				<label for="log"><input type="text" name="log" id="log" value="' . wp_specialchars ( stripslashes ( $user_login ) , 1 ) . '" size="22" /> '
-				. apply_filters( 'pr_username_label', 'Username' ) . '</label><br />
-				<label for="pwd"><input type="password" name="pwd" id="pwd" size="22" /> ' 
-				. apply_filters( 'pr_password_label' , 'Password' ) . '</label><br />
+				<label for="log">
+				'. apply_filters( 'pr_username_label', 'Username' ) . '<br><input type="text" name="log" id="log" value="' . wp_specialchars ( stripslashes ( $user_login ) , 1 ) . '" size="22" /> </label><br />
+				<label for="pwd">
+				'. apply_filters( 'pr_password_label' , 'Password' ) . '<br><input type="password" name="pwd" id="pwd" size="22" /> </label><br />
+				<br>
 				<input type="submit" name="submit" value="Log In" class="button" />
 				<label for="rememberme"><input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> Remember me</label><br />
 			</p>
