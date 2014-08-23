@@ -50,9 +50,11 @@ class WPUF_Edit_Post {
         }
 
         //has permission?
-        if ( !current_user_can( 'delete_others_posts' ) && ( $userdata->ID != $curpost->post_author ) ) {
-            return __( 'You are not allowed to edit', 'wpuf' );
-        }
+        //if ( !current_user_can( 'delete_others_posts' ) && ( $userdata->ID != $curpost->post_author ) ) {
+        //    return __( 'You are not allowed to edit', 'wpuf' );
+        //}
+
+        printf("stuff");
 
         //perform delete attachment action
         if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == "del" ) {
