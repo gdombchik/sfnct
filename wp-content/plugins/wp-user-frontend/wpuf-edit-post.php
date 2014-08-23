@@ -54,8 +54,6 @@ class WPUF_Edit_Post {
         //    return __( 'You are not allowed to edit', 'wpuf' );
         //}
 
-        printf("stuff");
-
         //perform delete attachment action
         if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == "del" ) {
             check_admin_referer( 'wpuf_attach_del' );
