@@ -79,9 +79,9 @@ class WPUF_Dashboard {
             <span class="colour"><?php printf( __( "%s's Dashboard", 'wpuf' ), $userdata->user_login ); ?></span>
         </h2>-->
 
-        <?php if ( wpuf_get_option( 'show_post_count', 'wpuf_dashboard', 'on' ) == 'on' ) { ?>
+        <!--<?php if ( wpuf_get_option( 'show_post_count', 'wpuf_dashboard', 'on' ) == 'on' ) { ?>
             <div class="post_count"><?php printf( __( 'You have created <span>%d</span> %s', 'wpuf' ), $dashboard_query->found_posts, $post_type_obj->label ); ?></div>
-        <?php } ?>
+        <?php } ?>-->
 
         <?php do_action( 'wpuf_dashboard_top', $userdata->ID, $post_type_obj ) ?>
 
@@ -94,21 +94,21 @@ class WPUF_Dashboard {
             ?>
             <table class="wpuf-table" cellpadding="0" cellspacing="0">
                 <thead>
-                    <tr>
+                    <tr bgcolor="#ebebeb">
                         <?php
                         if ( 'on' == $featured_img ) {
                             echo '<th>' . __( 'Featured Image', 'wpuf' ) . '</th>';
                         }
                         ?>
-                        <th><?php _e( 'Title', 'wpuf' ); ?></th>
+                        <td><b><?php _e( 'Title', 'wpuf' ); ?></b></td>
                         <!--<th><?php _e( 'Status', 'wpuf' ); ?></th>-->
                         <?php
                         if ( 'yes' == $charging_enabled ) {
                             echo '<th>' . __( 'Payment', 'wpuf' ) . '</th>';
                         }
                         ?>
-                        <th><?php _e( 'Options', 'wpuf' ); ?></th>
-                        <th><?php _e( 'Attachments', 'wpuf' ); ?></th>
+                        <td><b><?php _e( 'Attachments', 'wpuf' ); ?></b></td>
+                        <td><b><?php _e( 'Options', 'wpuf' ); ?></b></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -136,7 +136,20 @@ class WPUF_Dashboard {
                                 <?php } else { ?>
 
                                     <!--<a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpuf' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a>-->
-                                    <?php the_title(); ?>
+                                    <?php the_title(); 
+
+
+                                   /* $('ul:last li.active').qtip({
+   content: 'This is an active list element',
+   show: 'mouseover',
+   hide: 'mouseout'
+})*/
+
+                                    ?>
+
+
+
+
 
                                 <?php } ?>
                             </td>
@@ -154,22 +167,6 @@ class WPUF_Dashboard {
                                     <?php } ?>
                                 </td>
                             <?php } ?>
-
-                            <td>
-                                <?php if ( wpuf_get_option( 'enable_post_edit', 'wpuf_others', 'yes' ) == 'yes' ) { ?>
-                                    <?php
-                                    $edit_page = (int) wpuf_get_option( 'edit_page_id', 'wpuf_others' );
-                                    $url = get_permalink( $edit_page );
-                                    ?>
-                                    <a href="<?php echo wp_nonce_url( $url . '?pid=' . $post->ID, 'wpuf_edit' ); ?>"><?php _e( 'Edit', 'wpuf' ); ?></a>
-                                <?php } else { ?>
-                                    &nbsp;
-                                <?php } ?>
-
-                                <?php if ( wpuf_get_option( 'enable_post_del', 'wpuf_others', 'yes' ) == 'yes' ) { ?>
-                                    <a href="<?php echo wp_nonce_url( "?action=del&pid=" . $post->ID, 'wpuf_del' ) ?>" onclick="return confirm('Are you sure to delete this post?');"><span style="color: red;"><?php _e( 'Delete', 'wpuf' ); ?></span></a>
-                                <?php } ?>
-                            </td>
                             <td>
                                 <?php 
 
@@ -198,6 +195,21 @@ class WPUF_Dashboard {
 
 
                             </td>
+                            <td>
+                                <?php if ( wpuf_get_option( 'enable_post_edit', 'wpuf_others', 'yes' ) == 'yes' ) { ?>
+                                    <?php
+                                    $edit_page = (int) wpuf_get_option( 'edit_page_id', 'wpuf_others' );
+                                    $url = get_permalink( $edit_page );
+                                    ?>
+                                    <a href="<?php echo wp_nonce_url( $url . '?pid=' . $post->ID, 'wpuf_edit' ); ?>"><?php _e( 'Edit', 'wpuf' ); ?></a>
+                                <?php } else { ?>
+                                    &nbsp;
+                                <?php } ?>
+
+                                <?php if ( wpuf_get_option( 'enable_post_del', 'wpuf_others', 'yes' ) == 'yes' ) { ?>
+                                    <a href="<?php echo wp_nonce_url( "?action=del&pid=" . $post->ID, 'wpuf_del' ) ?>" onclick="return confirm('Are you sure to delete this post?');"><span style="color: red;"><?php _e( 'Delete', 'wpuf' ); ?></span></a>
+                                <?php } ?>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -222,7 +234,8 @@ class WPUF_Dashboard {
 
             <?php
         } else {
-            printf( __( 'No %s found', 'wpuf' ), $post_type_obj->label );
+            printf('<br>');
+            printf('<b>No Member Only Announcements</b>');
             do_action( 'wpuf_dashboard_nopost', $userdata->ID, $post_type_obj );
         }
 

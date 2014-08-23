@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
             this.ajaxCategory();
         },
         
-        checkSubmit: function () {
+        checkSubmit: function () {   
             var form = $(this);
 
             form.find('.requiredField').each(function() {
@@ -23,6 +23,8 @@ jQuery(document).ready(function($) {
                     $(this).removeClass('invalid');
                 }
             });
+
+            echo ''; //this is pushing the error message.  Need to find a cleaner way of fixing this.
 
             var hasError = false;
 
