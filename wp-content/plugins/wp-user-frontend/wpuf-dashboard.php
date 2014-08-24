@@ -136,21 +136,9 @@ class WPUF_Dashboard {
                                 <?php } else { ?>
 
                                     <!--<a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpuf' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a>-->
-                                    <?php the_title(); 
-
-
-                                   /* $('ul:last li.active').qtip({
-   content: 'This is an active list element',
-   show: 'mouseover',
-   hide: 'mouseout'
-})*/
-
-                                    ?>
-
-
-
-
-
+                                   
+                                   <a href="#" title="<?php echo(get_the_content()) ?>"><?php the_title()?></a>
+                                    
                                 <?php } ?>
                             </td>
                             <!--<td>
@@ -300,4 +288,4 @@ class WPUF_Dashboard {
 
 }
 
-$wpuf_dashboard = new WPUF_Dashboard();
+$wpuf_dashboard = new WPUF_Dashboard(); 
