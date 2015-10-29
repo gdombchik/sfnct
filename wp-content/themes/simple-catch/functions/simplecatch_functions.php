@@ -321,7 +321,7 @@ if ( ! function_exists( 'simplecatch_sliders' ) ) :
  */
 function simplecatch_sliders() {	
 	global $post;
-	//delete_transient( 'simplecatch_sliders' );
+	delete_transient( 'simplecatch_sliders' );
 		
 	global $simplecatch_options_settings;
     $options = $simplecatch_options_settings;
@@ -348,8 +348,43 @@ function simplecatch_sliders() {
 					<div class="featured">
 						<div class="slide-image">';
 							if( has_post_thumbnail() ) {
-
-								$simplecatch_sliders .= '<a href="' . get_permalink() . '" title="Permalink to '.the_title('','',false).'">';
+							
+								$bloginfo_url = get_bloginfo('url');
+								if ($post->ID==82){
+									//home
+									$simplecatch_sliders .= '<a href="' . get_bloginfo('url') . '/" title="'.the_title('','',false).'">';
+									//echo $bloginfo_url;									
+								}else if ($post->ID==85){
+									//home
+									$simplecatch_sliders .= '<a href="' . get_bloginfo('url') . '/" title="'.the_title('','',false).'">';
+								}else if ($post->ID==105){
+									//about us
+									$simplecatch_sliders .= '<a href="' . get_bloginfo('url') . '/about_us/" title="'.the_title('','',false).'">';
+								}else if ($post->ID==112){
+									//vision and mission
+									$simplecatch_sliders .= '<a href="' . get_bloginfo('url') . '/vision_mission/" title="'.the_title('','',false).'">';
+								}else if ($post->ID==110){
+									//members
+									$simplecatch_sliders .= '<a href="' . get_bloginfo('url') . '/members/" title="'.the_title('','',false).'">';
+								}else if ($post->ID==146){
+									//funders
+									$simplecatch_sliders .= '<a href="' . get_bloginfo('url') . '/funders/" title="'.the_title('','',false).'">';
+								/*}else if ($post->ID==127){
+									//gallery 1
+									$simplecatch_sliders .= '<a href="' . get_bloginfo('url') . '/153-2/" title="'.the_title('','',false).'">';
+								}else if ($post->ID==131){
+									//gallery 2
+									$simplecatch_sliders .= '<a href="' . get_bloginfo('url') . '/153-2/" title="'.the_title('','',false).'">';
+								}else if ($post->ID==135){
+									//gallery 3
+									$simplecatch_sliders .= '<a href="' . get_bloginfo('url') . '/153-2/" title="'.the_title('','',false).'">';
+								}else if ($post->ID==143){
+									//gallery 4
+									$simplecatch_sliders .= '<a href="' . get_bloginfo('url') . '/153-2/" title="'.the_title('','',false).'">';*/
+								}
+									
+								
+								//$simplecatch_sliders .= '<a href="' . get_permalink() . '" title="Permalink to '.the_title('','',false).'">';
 
 								if( $options[ 'remove_noise_effect' ] == "0" ) {
 									$simplecatch_sliders .= '<span class="img-effect pngfix"></span>';
@@ -365,7 +400,7 @@ function simplecatch_sliders() {
 					</div> <!-- .featured -->
 					<div class="featured-text">';
 						if( $excerpt !='') {
-							$simplecatch_sliders .= the_title( '<span class="slider-title">','</span>', false ).'<span class="slider-sep">: </span><span class="slider-content">'.$excerpt.'</span>';
+							//$simplecatch_sliders .= the_title( '<span class="slider-title">','</span>', false ).'<span class="slider-sep">: </span><span class="slider-content">'.$excerpt.'</span>';
 						}
 						$simplecatch_sliders .= '
 					</div><!-- .featured-text -->
@@ -400,8 +435,18 @@ function simplecatch_sliderbreadcrumb() {
 	// Get Page ID outside Loop
 	$page_id = $wp_query->get_queried_object_id();	
 	
+	// This function passes the value of slider effect to js file
+	//if( function_exists( 'simplecatch_pass_slider_value' ) ) {
+	//	simplecatch_pass_slider_value();
+	//}
+	// display featured slider
+	//if ( function_exists( 'simplecatch_sliders' ) ):
+	//	simplecatch_sliders();
+	//endif;
+	
+	
 	// If the page is home or front page  
-	if ( is_front_page() || ( is_home() && $page_for_posts != $page_id ) ) :
+	if ( is_front_page() || ( is_home() && $page_for_posts != $page_id )) : //|| is_page()) :
 		// This function passes the value of slider effect to js file 
 		if( function_exists( 'simplecatch_pass_slider_value' ) ) {
 			simplecatch_pass_slider_value();
@@ -467,8 +512,7 @@ function simplecatch_headersocialnetworks() {
 						$options[ 'social_odnoklassniki' ],
 						$options[ 'social_goodreads' ],
 						$options[ 'social_skype' ],
-						$options[ 'social_soundcloud' ],
-						$options[ 'social_email' ]
+						$options[ 'social_soundcloud' ]
 					);
 	$flag = 0;
 	if( !empty( $elements ) ) {
@@ -621,11 +665,7 @@ function simplecatch_headersocialnetworks() {
 					$simplecatch_headersocialnetworks .=
 						'<li class="soundcloud"><a href="'.esc_url( $options[ 'social_soundcloud' ] ).'" title="'.sprintf( esc_attr__( '%s on Soundcloud', 'simplecatch' ),get_bloginfo( 'name' ) ).'" target="_blank">'.get_bloginfo( 'name' ).' Soundcloud </a></li>';
 				}
-				//Email
-				if ( !empty( $options[ 'social_email' ] ) && is_email($options[ 'social_email' ] ) ) {
-					$simplecatch_headersocialnetworks .=
-						'<li class="email"><a href="mailto:'.sanitize_email( $options[ 'social_email' ] ).'" title="'.sprintf( esc_attr__( '%s on Email', 'simplecatch' ),get_bloginfo( 'name' ) ).'" target="_blank">'.get_bloginfo( 'name' ).' Email </a></li>';
-				}			
+		
 				$simplecatch_headersocialnetworks .='
 			</ul>
 			<div class="row-end"></div>';
@@ -930,7 +970,7 @@ function simplecatch_loop() {
 	if( is_page() ): ?>
     
 		<div <?php post_class(); ?> >
-			<h2 class="entry-title"><?php the_title(); ?></h2>
+			<!--<h2 class="entry-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>-->
        		<?php the_content(); 
 			// copy this <!--nextpage--> and paste at the post content where you want to break the page
 			 wp_link_pages(array( 
