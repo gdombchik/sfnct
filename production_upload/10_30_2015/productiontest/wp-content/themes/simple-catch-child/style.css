@@ -1,0 +1,21 @@
+/*
+Theme Name: Simple Catch Child
+Theme URI: sfnct/themes/simple-catch-child
+Description:  Simple Catch Child Theme
+Author: Gregory Dombchik
+Author URI: sfnct
+Template: simple-catch
+Version: 1.0.0
+Tags: black, gray, silver, white, light, dark, brown, one-column, two-columns, left-sidebar, right-sidebar, fixed-layout, custom-menu, featured-images, full-width-template, theme-options, threaded-comments, translation-ready
+Text Domain:  simple-catch-child
+*/
+
+/*Import the Parent style.css*/
+@import url("../simple-catch/style.css");
+
+/* =Theme customization starts here
+------------------------------------------------------- */
+
+.featured .img-effect {
+	background:url(); //load empty background
+}
